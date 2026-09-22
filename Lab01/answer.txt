@@ -1,0 +1,67 @@
+Question: What happen if users choose "Cancel"?
+*In the program, JOptionPane.showConfirmDialog() will return one of three cases:
+-JOptionPane.YES_OPTION (0) if choosing YES 
+-JOptionPane.NO_OPTION (1) if choosing NO
+JOptionPane.CANCEL_OPTION (2) if choosing CANCEL
+*But the program will check JOPtionPane.YES_OPTION and recognize that other choices is NO. So, if users choose CANCEL, 
+the program shows the result: "You've chosen: No"
+
+Question: How to customize the options to users, e.g only two options: "Yes" and "No", OR " I do" and "I don't" 
+(Suggestion: Use JavaDocs or using Eclipse/Netbean IDE help)
+*By default, JOptionPane.showConfirmDialog() displays 3 options: Yes, No, Cancel. To limit to only two options: "Yes", "No"
+we can use the following:
+-Only show "Yes"; "No"
+
+import javax.swing.JOptionPane;
+
+public class YesNoDialog {
+    public static void main(String[] args) {
+        int choice = JOptionPane.showOptionDialog(
+            null,
+            "Do you like it?",
+            "Your feedback",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            null,
+            null
+        );
+
+        if (choice == 0) {
+            JOptionPane.showMessageDialog(null, "User selected: Yes");
+        } else if (choice == 1) {
+            JOptionPane.showMessageDialog(null, "User selected: No");
+        } else {
+            JOptionPane.showMessageDialog(null, "User closed the dialog");
+        }
+    }
+}
+
+-To customize the button names instead of "Yes"; "No". We pass an Object[] array containing the button name to showOptionDialog()
+
+import javax.swing.JOptionPane;
+
+public class CustomizeDialog {
+    public static void main(String[] args) {
+        Object[] options = {"I do", "I don't"};
+        int choice = JOptionPane.showOptionDialog(
+            null,
+            "Do you like it?",
+            "Your feed back",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            options,
+            options[0]
+        );
+
+        if (choice == 0) {
+            JOptionPane.showMessageDialog(null, "User selected: I do");
+        } else if (choice == 1) {
+            JOptionPane.showMessageDialog(null, "User selected: I don't");
+        } else {
+            JOptionPane.showMessageDialog(null, "User closed the dialog");
+        }
+    }
+}
+
